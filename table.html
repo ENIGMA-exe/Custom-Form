@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+       <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <nav></nav>
+       <h1>Details Table</h1>
+
+       <section class="table">
+            <!-- shop table -->
+            <table class="shop-table">
+                <tr>
+                    <th>Shop's Name</th>
+                    <th>Shop's Address</th>
+                </tr>
+            </table>
+
+            <!-- item table -->
+            <table class="item-table">
+                <tr>
+                    <th>Item's Name</th>
+                    <th>Item's Quantity</th>
+                </tr>
+            </table>
+
+            <!-- delivery address -->
+            <table class="delivery-table">
+                <tr>
+                    <th>Delivery Man Name</th>
+                    <th>Delivery's Number</th>
+                </tr>
+            </table>
+       </section>
+    </body>
+
+    <script>
+        const baseUrl = "http://localhost:3135/"
+        var shop_table = document.getElementsByClassName("shop-table")[0]
+        var item_table = document.getElementsByClassName('item-table')[0]
+        var delivery_table = document.getElementsByClassName('delivery-table')[0]
+
+        //fill shop data
+        $.get(baseUrl+"shop",function(result){
+                result.forEach(function(item,indesx){
+                    shop_table.innerHTML += `<tr>
+                    <td>${item.shop_name}</td>
+                    <td>${item.address}</td>
+                </tr>`
+                })
+        })
+
+        //fill item data
+        $.get(baseUrl+"item",function(result){
+                result.forEach(function(item,indesx){
+                    item_table.innerHTML += `<tr>
+                    <td>${item.name}</td>
+                    <td>${item.quantity}</td>
+                </tr>`
+                })
+        })
+
+        //fill delivery data
+        $.get(baseUrl+"delivery",function(result){
+                console.log(result)
+                result.forEach(function(item,indesx){
+                    delivery_table.innerHTML += `<tr>
+                    <td>${item.delivery_name}</td>
+                    <td>${item.delivery_number}</td>
+                </tr>`
+                })
+        })
+    </script>
+</html>
